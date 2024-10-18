@@ -1,0 +1,20 @@
+replicaCount: 1
+
+image:
+  repository: vllm/vllm-openai
+  tag: v0.6.2
+
+service:
+  port: 8000
+  hostPort: 8989
+
+env:
+  HUGGING_FACE_HUB_TOKEN: "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"
+  CUDA_VISIBLE_DEVICES: "0"
+  HF_HUB_ENABLE_HF_TRANSFER: "false"
+
+resources:
+  limits:
+    nvidia_gpu: 1  # Request 1 GPU (adjust as necessary)
+
+args: "--model Qwen/Qwen2.5-0.5B --dtype=half --kv-cache-dtype fp8 --disable-log-requests"

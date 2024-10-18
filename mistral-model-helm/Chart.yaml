@@ -1,0 +1,6 @@
+# mistral-model/Chart.yaml
+apiVersion: v2
+name: mistral-model
+description: A Helm chart for deploying the Mistral model
+version: 0.1.0
+appVersion: "1.0"

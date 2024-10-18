@@ -1,0 +1,48 @@
+# mistral-model/templates/deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  labels:
+    app: mistral-model
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: mistral-model
+  template:
+    metadata:
+      labels:
+        app: mistral-model
+    spec:
+      containers:
+        - name: mistral-container
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          ports:
+            - containerPort: {{ .Values.service.port }}
+              hostPort: {{ .Values.service.hostPort }}
+          env:
+            - name: HUGGING_FACE_HUB_TOKEN
+              value: "{{ .Values.env.HUGGING_FACE_HUB_TOKEN }}"
+            - name: CUDA_VISIBLE_DEVICES
+              value: "{{ .Values.env.CUDA_VISIBLE_DEVICES }}"
+            - name: HF_HUB_ENABLE_HF_TRANSFER
+              value: "{{ .Values.env.HF_HUB_ENABLE_HF_TRANSFER }}"
+          args: 
+            {{- if .Values.args }}
+            {{- range $arg := splitList " " .Values.args }}
+              - {{ $arg | quote }}
+            {{- end }}
+            {{- else }}
+            {{- end }}
+          resources:
+            limits:
+              nvidia.com/gpu: {{ .Values.resources.limits.nvidia_gpu }}
+          volumeMounts:
+            - name: local-path-volume
+              mountPath: /root/.cache/huggingface  # The path inside the container where the volume will be mounted
+      volumes:
+        - name: local-path-volume
+          hostPath:
+            path: /home/rishabh/.cache/huggingface  # The local path on your host machine
+            type: DirectoryOrCreate
