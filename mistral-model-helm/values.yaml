@@ -17,6 +17,6 @@ resources:
   limits:
     nvidia_gpu: 1  # Request 1 GPU (adjust as necessary)
 
-args: "--model Qwen/Qwen2.5-0.5B --dtype=half --disable-log-requests"
+args: "--model Qwen/Qwen2.5-0.5B --dtype=half --kv-cache-dtype fp8 --disable-log-requests"
 
 # args: "--model Qwen/Qwen2.5-0.5B --dtype=half --kv-cache-dtype fp8 --disable-log-requests"
