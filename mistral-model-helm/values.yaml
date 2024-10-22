@@ -9,14 +9,13 @@ service:
   hostPort: 8989
 
 env:
-  HUGGING_FACE_HUB_TOKEN: "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"
-  CUDA_VISIBLE_DEVICES: "0"
-  HF_HUB_ENABLE_HF_TRANSFER: "false"
-
+  API_KEY: "ollama"  # Updated API key for the llama3 model
+  BASE_URL: "http://192.168.50.71:11434/v1/"  # Updated base URL for the llama3 model
+  MODEL_NAME: "llama3:latest"  # Model name and version
 resources:
   limits:
     nvidia_gpu: 1  # Request 1 GPU (adjust as necessary)
 
-args: "--model Qwen/Qwen2.5-0.5B --dtype=half --disable-log-requests"
+args: "--model llama3:latest --api_key=ollama --base_url=http://192.168.50.71:11434/v1/ --disable-log-requests"
 
 # args: "--model Qwen/Qwen2.5-0.5B --dtype=half --kv-cache-dtype fp8 --disable-log-requests"
