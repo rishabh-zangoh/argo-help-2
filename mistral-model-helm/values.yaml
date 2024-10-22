@@ -10,7 +10,7 @@ service:
 
 env:
   HUGGING_FACE_HUB_TOKEN: "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"
-  CUDA_VISIBLE_DEVICES: "1"
+  CUDA_VISIBLE_DEVICES: "0"
   HF_HUB_ENABLE_HF_TRANSFER: "false"
 resources:
   limits:
