@@ -16,7 +16,7 @@ resources:
   limits:
     nvidia_gpu: 1  # Request 1 GPU (adjust as necessary)
     
-args: "--model meta-llama/Llama-3.2-3B-Instruct --dtype=half --api-key ollama"  
+args: "--model meta-llama/Llama-3.2-3B-Instruct --dtype half --api-key ollama"
 
 
 # args: "--model Qwen/Qwen2.5-0.5B --dtype=half --kv-cache-dtype fp8 --disable-log-requests"
