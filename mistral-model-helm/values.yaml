@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: vllm/vllm-openai
-  tag: v0.6.2
+  tag: latest
 
 service:
   port: 8000
