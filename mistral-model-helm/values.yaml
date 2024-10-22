@@ -9,16 +9,14 @@ service:
   hostPort: 8989
 
 env:
-  API_KEY: "ollama"  # Updated API key for the llama3 model
-  BASE_URL: "http://192.168.50.71:11434/v1/"  # Updated base URL for the llama3 model
-  MODEL_NAME: "llama3:latest"  # Model name and version
+  HUGGING_FACE_HUB_TOKEN: "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"
+  CUDA_VISIBLE_DEVICES: "1"
+  HF_HUB_ENABLE_HF_TRANSFER: "false"
 resources:
   limits:
     nvidia_gpu: 1  # Request 1 GPU (adjust as necessary)
     
-args: 
-  - "--model=llama3"  # Use a valid model name
-  - "--api-key=ollama"  # Keep the API key
+args: "--model meta-llama/Llama-3.2-3B-Instruct --dtype=half --api-key ollama"  
 
 
 # args: "--model Qwen/Qwen2.5-0.5B --dtype=half --kv-cache-dtype fp8 --disable-log-requests"
